@@ -100,15 +100,12 @@ while True:
                 line1_length = math.sqrt((filtered_lines[0][2] - filtered_lines[0][0])**2 + (filtered_lines[0][3] - filtered_lines[0][1])**2)
                 line2_length = math.sqrt((filtered_lines[1][2] - filtered_lines[1][0])**2 + (filtered_lines[1][3] - filtered_lines[1][1])**2)
 
-                center_x = (filtered_lines[0][0] + filtered_lines[1][0] + filtered_lines[0][2] + filtered_lines[1][2]) // 4
-                center_y = (filtered_lines[0][1] + filtered_lines[1][1] + filtered_lines[0][3] + filtered_lines[1][3]) // 4
-
                 # Some trig using the slopes to go from the center to the endpoints of centerline
                 angle = np.arctan((first_slope + second_slope) / 2)
-                end_x1 = int(center_x - ((line1_length + line2_length) / 4) * np.cos(angle))
-                end_y1 = int(center_y - ((line1_length + line2_length) / 4) * np.sin(angle))
-                end_x2 = int(center_x + ((line1_length + line2_length) / 4) * np.cos(angle))
-                end_y2 = int(center_y + ((line1_length + line2_length) / 4) * np.sin(angle))
+                end_x1 = int((filtered_lines[0][0] + filtered_lines[1][0] + filtered_lines[0][2] + filtered_lines[1][2]) // 4 - ((line1_length + line2_length) / 4) * np.cos(angle))
+                end_y1 = int((filtered_lines[0][1] + filtered_lines[1][1] + filtered_lines[0][3] + filtered_lines[1][3]) // 4 - ((line1_length + line2_length) / 4) * np.sin(angle))
+                end_x2 = int((filtered_lines[0][0] + filtered_lines[1][0] + filtered_lines[0][2] + filtered_lines[1][2]) // 4 + ((line1_length + line2_length) / 4) * np.cos(angle))
+                end_y2 = int((filtered_lines[0][1] + filtered_lines[1][1] + filtered_lines[0][3] + filtered_lines[1][3]) // 4 + ((line1_length + line2_length) / 4) * np.sin(angle))
                 
                 # Centerline for relatively horizontal cases
                 cv2.line(frame, (end_x1, end_y1), (end_x2, end_y2), (0, 0, 255), 3)
