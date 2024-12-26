@@ -47,9 +47,6 @@ while True:
         # Converts 2D array into 1D array
         parallel_lines = parallel_lines[:, 0, :]
     
-    def distance(p1, p2):
-        return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
-    
     filtered_lines = []
     midpoints = []
 
