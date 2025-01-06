@@ -15,7 +15,7 @@ while True:
 
     """Find the square mask region given screen dimensions"""
     rows, columns = frame.shape[:2] 
-    square_size = min(columns, rows)*2/5
+    square_size = min(columns, rows)*3/5
     center_column, center_row = columns // 2, rows // 2
     half_square = square_size // 2
     vertices = np.array([[
